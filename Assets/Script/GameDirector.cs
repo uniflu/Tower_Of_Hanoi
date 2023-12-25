@@ -27,20 +27,20 @@ public class GameDirector : MonoBehaviour
     [SerializeField] AudioClip gameBGM;
     [SerializeField] AudioClip successSE;
 
-    //‚Ç‚±‚Ìƒ|[ƒ‹‚ğ‘I‘ğ‚µ‚Ä‚¢‚é‚©
-    PolePos selectPolePos = PolePos.NONE;// = global::PoleNum.NONE;
+    //ï¿½Ç‚ï¿½ï¿½Ìƒ|ï¿½[ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©
+    PolePos selectPolePos = PolePos.NONE;
 
-    //‚Ç‚ÌUnit‚ğ‘I‘ğ‚µ‚Ä‚¢‚é‚©
+    //ï¿½Ç‚ï¿½Unitï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©
     int selectUnitNum;
 
     const int PoleNum = 3;
 
-    //ƒ†ƒjƒbƒgƒŠƒXƒg
+    //ï¿½ï¿½ï¿½jï¿½bï¿½gï¿½ï¿½ï¿½Xï¿½g
     public List<GameObject> Units { get; set; } = new List<GameObject>();
 
     public static GameDirector I { get; private set; }
 
-    //ƒXƒ^ƒbƒN
+    //ï¿½Xï¿½^ï¿½bï¿½N
     public Stack<int>[] stacks;
     public UpDownButtons[] upDownButtons;
     [SerializeField] GameObject finishTextObj;
@@ -52,29 +52,29 @@ public class GameDirector : MonoBehaviour
 
     private void Start()
     {
-        //‰¹Šy‚ğ–Â‚ç‚µn‚ß‚é
+        //ï¿½ï¿½ï¿½yï¿½ï¿½Â‚ç‚µï¿½nï¿½ß‚ï¿½
         AudioPlayer.I.PlayBGM(gameBGM);
 
-        //ƒ†ƒjƒbƒg‚ğì¬
+        //ï¿½ï¿½ï¿½jï¿½bï¿½gï¿½ï¿½ï¿½ì¬
         UnitMaker.I.CreateUnits();
 
-        //‰Šúİ’è
+        //ï¿½ï¿½ï¿½ï¿½ï¿½İ’ï¿½
         selectPolePos = PolePos.NONE;
 
-        //stack‚ğ‰Šú‰»
+        //stackï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         stacks = new Stack<int>[PoleNum];
         for (int i = 0; i < stacks.Length; i++)
         {
             stacks[i] = new Stack<int>();//.Clear();
         }
 
-        //stack‚Ì0”Ô–Ú‚ğİ’è
+        //stackï¿½ï¿½0ï¿½Ô–Ú‚ï¿½İ’ï¿½
         for (int i = 0; i < GlobalSetting.I.Step; i++)
         {
             stacks[0].Push(GlobalSetting.I.Step - i - 1);
         }
 
-        //UpDownƒ{ƒ^ƒ“‚Éˆ—‚ğŠ„‚è“–‚Ä
+        //UpDownï¿½{ï¿½^ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è“–ï¿½ï¿½
         for (int i = 0; i < 3; i++)
         {
             upDownButtons[i].Init();
@@ -84,31 +84,31 @@ public class GameDirector : MonoBehaviour
         upDownButtons[1].Button.onClick.AddListener(() => OnClickUpDownButton(1));
         upDownButtons[2].Button.onClick.AddListener(() => OnClickUpDownButton(2));
 
-        //ƒIƒ“EƒIƒt
+        //ï¿½Iï¿½ï¿½ï¿½Eï¿½Iï¿½t
         upDownButtons[0].Button.gameObject.SetActive(true);
         upDownButtons[1].Button.gameObject.SetActive(false);
         upDownButtons[2].Button.gameObject.SetActive(false);
     }
 
-    //UpDownƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«‚Ìˆ—
+    //UpDownï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ìï¿½ï¿½ï¿½
     void OnClickUpDownButton(int pos)
     {
-        //‘I‘ğ‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚Éã‚°‚é
+        //ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½Éã‚°ï¿½ï¿½
         if (selectPolePos == PolePos.NONE) 
         {
-            //‘I‘ğ‚µ‚Ä‚¢‚éƒ|[ƒ‹‚ğŠi”[
+            //ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½|ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½[
             selectPolePos = (PolePos)Enum.ToObject(typeof(PolePos), pos);
 
-            //‘I‘ğ‚µ‚Ä‚¢‚éƒ†ƒjƒbƒg‚ğŠi”[
+            //ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ†ï¿½jï¿½bï¿½gï¿½ï¿½ï¿½iï¿½[
             selectUnitNum = stacks[(int)selectPolePos].Pop();
 
-            //ã‚É‚ ‚°‚é
+            //ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½
             Units[selectUnitNum].transform.position = GameSceneSetting.I.GetSelectPos(selectPolePos);
 
-            //ƒeƒLƒXƒgİ’è
+            //ï¿½eï¿½Lï¿½Xï¿½gï¿½İ’ï¿½
             for (int i = 0; i < (int)PolePos.NONE; i++)
             {
-                //Œ»İ‘I‘ğ‚µ‚Ä‚¢‚é”Ô†‚æ‚è‘å‚«‚¢Aor ‹ó‚Ì
+                //ï¿½ï¿½ï¿½İ‘Iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½å‚«ï¿½ï¿½ï¿½Aor ï¿½ï¿½Ìï¿½
                 if (stacks[i].Count == 0 || stacks[i].Peek() > selectUnitNum)
                 {
                     upDownButtons[i].Button.gameObject.SetActive(true);
@@ -122,33 +122,33 @@ public class GameDirector : MonoBehaviour
             }
         }
 
-        //~‚ë‚·
+        //ï¿½~ï¿½ë‚·
         else
         {
-            //w’è‚µ‚½ˆÊ’u‚É~‚ë‚·
+            //ï¿½wï¿½è‚µï¿½ï¿½ï¿½Ê’uï¿½É~ï¿½ë‚·
             PolePos pos1 = (PolePos)Enum.ToObject(typeof(PolePos), pos);
             Units[selectUnitNum].transform.position = GameSceneSetting.I.GetPos(pos1, stacks[pos].Count);
 
-            //‰º‚µ‚½ˆÊ’u = ã‚°‚éˆÊ’uˆÈŠO‚È‚ç‰ñ”‚ğ‰ÁZ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê’u = ï¿½ã‚°ï¿½ï¿½Ê’uï¿½ÈŠOï¿½È‚ï¿½ñ”‚ï¿½ï¿½ï¿½ï¿½Z
             if (pos1 != selectPolePos)
             {
                 MovesText.I.AddMoves();
             } 
 
-            //ƒXƒ^ƒbƒN‚É’Ç‰Á
+            //ï¿½Xï¿½^ï¿½bï¿½Nï¿½É’Ç‰ï¿½
             stacks[pos].Push(selectUnitNum);
 
-            //Š®¬‚µ‚½‚©‚Ç‚¤‚©”»’f(‰E‚ÌUnit” = ’i”)
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½f(ï¿½Eï¿½ï¿½Unitï¿½ï¿½ = ï¿½iï¿½ï¿½)
             if (stacks[(int)PolePos.RIGHT].Count == GlobalSetting.I.Step)
             {
                 Finish();
                 return;
             }
 
-            //ã‚°‚éİ’è
+            //ï¿½ã‚°ï¿½ï¿½İ’ï¿½
             for (int i = 0; i < (int)PolePos.NONE; i++)
             {
-                //ƒ†ƒjƒbƒg‚ª‘¶İ
+                //ï¿½ï¿½ï¿½jï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (stacks[i].Count != 0)
                 {
                     upDownButtons[i].Button.gameObject.SetActive(true);
@@ -161,27 +161,27 @@ public class GameDirector : MonoBehaviour
                 }
             }
 
-            //‘I‘ğ‚È‚µó‘Ô
+            //ï¿½Iï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½
             selectPolePos = PolePos.NONE;
         }
     }
 
-    //I—¹‚Ìˆ—
+    //ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
     void Finish()
     {
-        //updownƒ{ƒ^ƒ“‚ğ”ñ•\¦‚É‚·‚é
+        //updownï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
         foreach (var u in upDownButtons) 
         {
             u.Button.gameObject.SetActive(false);
         }
 
-        //FinishƒeƒLƒXƒg‚ğ•\¦
+        //Finishï¿½eï¿½Lï¿½Xï¿½gï¿½ï¿½\ï¿½ï¿½
         finishTextObj.SetActive(true);
 
-        //‰¹Šy‚ğ~‚ß‚é
+        //ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½~ï¿½ß‚ï¿½
         AudioPlayer.I.PauseBGM();//StopBGM();
 
-        //Œø‰Ê‰¹‚ğ–Â‚ç‚·
+        //ï¿½ï¿½ï¿½Ê‰ï¿½ï¿½ï¿½Â‚ç‚·
         AudioPlayer.I.PlaySE(successSE);
     }
 }

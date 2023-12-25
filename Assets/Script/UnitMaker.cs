@@ -5,10 +5,8 @@ using UnityEngine;
 public class UnitMaker : MonoBehaviour
 {
     [SerializeField] GameObject unitPrefab;
-    //[SerializeField] int Step;//’i”
     [SerializeField] List<Color> unitColors;
 
-    //[SerializeField] Vector3 originPos;
     public static UnitMaker I { get; private set; }
 
     private void Awake()
@@ -20,40 +18,35 @@ public class UnitMaker : MonoBehaviour
 
     public void CreateUnits()
     {
-        //GameDirector‚ÌUnitƒŠƒXƒg‚ğ‹ó‚É‚·‚é
+        //GameDirectorï¿½ï¿½Unitï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
         GameDirector.I.Units.Clear();
 
-        //ã‚Ì’i‚©‚çŒ`¬‚µ‚Ä‚¢‚­
+        //ï¿½ï¿½Ì’iï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
         for (int i = 0; i < GlobalSetting.I.Step; i++)
         {
-            //”z’u‰ÓŠ
+            //ï¿½zï¿½uï¿½Óï¿½
             Vector3 pos = GameSceneSetting.I.GetPos(PolePos.LEFT, GlobalSetting.I.Step - i - 1);
-            //new Vector3(GameSceneSetting.I.GetX(PolePos.LEFT), GameSceneSetting.I.GetY(i), 0);
-            //Vector3 pos = new Vector3(- GameSceneSetting.I.poleInterval, GameSceneSetting.I.bottomY, 0)
-            //    /*@originPos*/ + Vector3.up * (GlobalSetting.I.Step - i - 1);
 
-            //”z’u
+            //ï¿½zï¿½u
             GameObject obj = Instantiate(unitPrefab);
             obj.transform.position = pos;
             obj.name = $"unit_{i}";
 
-            //ƒuƒƒbƒN‚Ì‘å‚«‚³‚ğİ’è‚µAF‚ğ•ÏX
+            //ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Ì‘å‚«ï¿½ï¿½ï¿½ï¿½İ’è‚µï¿½Aï¿½Fï¿½ï¿½ÏX
             Transform block = obj.transform.GetChild(0);//.GetComponent<TextMesh>();
             block.localScale = new Vector3(1.5f + 0.5f * i, 1, 1);
 
-            //F•ÏX
+            //ï¿½Fï¿½ÏX
             MeshRenderer meshRenderer = block.GetComponent<MeshRenderer>();
             meshRenderer.material.color = unitColors[i];
 
 
-            //ƒeƒLƒXƒg‚Ì•¶š‚ğ•ÏX
+            //ï¿½eï¿½Lï¿½Xï¿½gï¿½Ì•ï¿½ï¿½ï¿½ï¿½ï¿½ÏX
             TextMesh textMesh = obj.transform.GetChild(1).GetComponent<TextMesh>();
             textMesh.text = $"{i + 1}";
 
-            //GameDirector‚ÌƒŠƒXƒg‚É’Ç‰Á‚·‚é
+            //GameDirectorï¿½Ìƒï¿½ï¿½Xï¿½gï¿½É’Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
             GameDirector.I.Units.Add(obj);
         }
-
-        //ƒŠƒXƒg‚ğ•Ô‚·
     }
 }

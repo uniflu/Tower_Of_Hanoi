@@ -4,28 +4,18 @@ using UnityEngine;
 
 public class GameSceneSetting : MonoBehaviour
 {
-    [SerializeField] float poleInterval;//ƒ|[ƒ‹ŠÔ‚Ì•
-    [SerializeField] float bottomY;//ˆê”Ô‰º‚ÌyÀ•W
-    [SerializeField] float selectY;//‘I‘ğ‚ÌyÀ•W
-
-    //float GetX(PolePos polePos)
-    //{
-    //    return ((int)polePos - 1) * poleInterval;
-    //}
-
-    //float GetY(int i)
-    //{
-    //    return bottomY + GlobalSetting.I.Step - i - 1;
-    //}
+    [SerializeField] float poleInterval;//ï¿½|ï¿½[ï¿½ï¿½ï¿½Ô‚Ì•ï¿½
+    [SerializeField] float bottomY;//ï¿½ï¿½Ô‰ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½W
+    [SerializeField] float selectY;//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½W
     
-    //i‚Í‰º‚©‚ç‰½”Ô–Ú‚©‚ğ¦‚·
+    //iï¿½Í‰ï¿½ï¿½ï¿½ï¿½ç‰½ï¿½Ô–Ú‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public Vector3 GetPos(PolePos polePos, int i)
     {
         return new Vector3(((int)polePos - 1) * poleInterval,
             bottomY + i, 0);
     }
 
-    //i‚Í‰º‚©‚ç‰½”Ô–Ú‚©‚ğ¦‚·
+    //iï¿½Í‰ï¿½ï¿½ï¿½ï¿½ç‰½ï¿½Ô–Ú‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public Vector3 GetSelectPos(PolePos polePos)
     {
         return new Vector3(((int)polePos - 1) * poleInterval,

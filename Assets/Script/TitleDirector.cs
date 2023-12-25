@@ -20,36 +20,27 @@ public class TitleDirector : MonoBehaviour
 
     void Start()
     {
-        //BGM‚ğ–Â‚ç‚·
+        //BGMï¿½ï¿½Â‚ç‚·
         AudioPlayer.I.PlayBGM(titleBGM);
 
-        //ƒhƒƒbƒvƒ_ƒEƒ“‚Ì‘I‘ğˆ•ÒW
-        stepDropdown.options?.Clear();//‹ó‚É‚·‚é
+        //ï¿½hï¿½ï¿½ï¿½bï¿½vï¿½_ï¿½Eï¿½ï¿½ï¿½Ì‘Iï¿½ï¿½ï¿½ï¿½ï¿½ÒW
+        stepDropdown.options?.Clear();//ï¿½ï¿½É‚ï¿½ï¿½ï¿½
         for (int i = 3; i < 8; i++)
         {
             Dropdown.OptionData optionData = new Dropdown.OptionData($"{i}");
             stepDropdown.options.Add(optionData);
         }
 
-        //ƒQ[ƒ€ŠJnƒ{ƒ^ƒ“‚Éˆ—‚ğŠ„‚è“–‚Ä‚ÌŠ„‚è“–‚Ä
+        //ï¿½Qï¿½[ï¿½ï¿½ï¿½Jï¿½nï¿½{ï¿½^ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è“–ï¿½Ä‚ÌŠï¿½ï¿½è“–ï¿½ï¿½
         Action startAction = () =>
         { 
-            //ƒXƒeƒbƒv”‚ğXV
+            //ï¿½Xï¿½eï¿½bï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½V
             GlobalSetting.I.Step = stepDropdown.value + 3;
 
-            //ƒV[ƒ“‚ğ“Ç‚İ‚Ş
+            //ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
             SceneManager.LoadScene(SceneSetting.I.Main);
 
         };
         startButton.Init(()=>startAction());
     }
-
-    //IEnumerator CorStartGame()
-    //{
-    //    //–Â‚èI‚í‚é‚Ü‚Å‘Ò‹@
-    //    yield return startButton.Cor();
-
-       
-        
-    //}
 }

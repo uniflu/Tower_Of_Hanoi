@@ -10,45 +10,20 @@ public class MenuButtonsController : MonoBehaviour
     [SerializeField] SoundButton_C1 retryButton;
     [SerializeField] SoundButton_C1 titleButton;
 
-    ////uRetryv‚ð‰Ÿ‚·
-    //IEnumerator OnClickRetryButton()
-    //{
-    //    //‰¹‚ª–Â‚èI‚í‚é‚Ü‚Å
-    //    yield return retryButton.Cor();
-
-       
-    //}
-
-    ////uBackv‚ð‰Ÿ‚·(ƒ^ƒCƒgƒ‹‚É–ß‚é)
-    //IEnumerator OnClickTitleButton()
-    //{
-    //    //‰¹‚ª–Â‚èI‚í‚é‚Ü‚Å
-    //    yield return titleButton.Cor();
-
-        
-    //}
-
-    //private void abc(int a)
-    //{
-        
-    //}
-
     private void Start()
     {
-        //Action a = () => abc(5);
-
-        //uretryv
+        //ï¿½uretryï¿½v
         Action retryAction = () =>
         {
-            // Œ»Ý‚ÌScene‚ðŽæ“¾
+            // ï¿½ï¿½ï¿½Ý‚ï¿½Sceneï¿½ï¿½ï¿½æ“¾
             Scene loadScene = SceneManager.GetActiveScene();
 
-            // Œ»Ý‚ÌƒV[ƒ“‚ðÄ“Ç‚Ýž‚Ý‚·‚é
+            // ï¿½ï¿½ï¿½Ý‚ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ä“Ç‚Ýï¿½ï¿½Ý‚ï¿½ï¿½ï¿½
             SceneManager.LoadScene(loadScene.name);
         };
         retryButton.Init(() => retryAction());
 
-        //uTitlev
+        //ï¿½uTitleï¿½v
         titleButton.Init(() => SceneManager.LoadScene(SceneSetting.I.Title));
     }
 }
