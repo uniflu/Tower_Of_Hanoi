@@ -7,7 +7,6 @@ using System;
 [Serializable]
 public class UpDownButtons : SoundButton2
 {
-    //public Button button;
     public Text text;
 }
 
