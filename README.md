@@ -3,6 +3,14 @@
 - 3~7段に設定して遊べます。
 <br>
 
+## イメージ
+<p>タイトル画面</p>
+<img src="./sample/TitleScene.png"><br>
+
+<p>メイン画面</p>
+<img src="./sample/MainScene.png"><br>
+<br>
+
 ## 動作環境など
 - WebGLの780×405で動作するように作成しました。
 <br>
